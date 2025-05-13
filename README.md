@@ -1,3 +1,3 @@
-Course contents at:
+# Times Tables
 
-https://www.udemy.com/course/100-days-of-code/learn/lecture/19964890#overview
+A basic program that generates a times tables and tracts scores for each player.
