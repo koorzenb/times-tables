@@ -1,0 +1,26 @@
+{
+	// cspell.json: Configuration file for cspell (Code Spell Checker)
+	"version": "0.2",
+	"language": "en",
+	"dictionaries": [
+		"typescript",
+		"node",
+		"python"
+	],
+	"ignorePaths": [
+		"**/node_modules/**",
+		"**/dist/**",
+		"**/build/**",
+		"**/__pycache__/**",
+		"**/*.min.js",
+		"**/*.map",
+		"**/*.lock",
+		"**/venv/**"
+	],
+	"words": [
+		"dotenv"
+	],
+	"ignoreWords": [
+		// Add words to explicitly ignore here
+	]
+}
