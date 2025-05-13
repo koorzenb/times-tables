@@ -1,5 +1,9 @@
 import random
-from logos import wrong, correct
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.logos import wrong, correct
 from typing import Dict, Any, Union
 
 def generate_question(max_num):
@@ -8,7 +12,12 @@ def generate_question(max_num):
     return num1, num2, num1 * num2
 
 def ask_question(text):
-    return int(input(f"{text}? "))
+    try:
+        return int(input(f"{text}? "))
+    except ValueError:
+        print('\n' * 20)
+        print("Invalid input. Please enter a number.")
+        return ask_question(text)
 
 def print_response(isCorrect, answer, eq):
 	if isCorrect:          

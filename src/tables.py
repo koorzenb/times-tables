@@ -2,8 +2,14 @@ import json
 import os
 import random
 import time
+import sys
 
-from logos import *
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.append(current_dir)
+
+# Now we can import logos and logic modules
+from logos import welcome, congratulations, try_next_time
 from logic import *
 
 NUMBER_OF_QUESTIONS = 20
