@@ -63,13 +63,13 @@ def main():
         print(f"Sorry, {name}, you failed this time. Better luck next time!")
     print(f"You got {correct_answers} out of {NUMBER_OF_QUESTIONS} questions correct.")
 
-    high_scores = {}
+    updated_high_scores = {}
     file = os.path.join(os.path.dirname(__file__), "high_scores.json")
 
     #check if file exists
     if not os.path.exists(file):
         with open(file, "w") as data_file:
-            json.dump(high_scores, data_file)
+            json.dump({}, data_file)
 
     else:
         with open(file, "r") as data_file:
@@ -77,20 +77,18 @@ def main():
             if str_data:
                 high_scores = json.loads(str_data)
                 user_high_record = high_scores.get(name, [])
-                add_high_scores(high_scores, name, correct_answers, elapsed_time)
+                updated_high_scores = add_high_scores(high_scores, name, correct_answers, elapsed_time)
             else:
-                high_scores[name] = correct_answers
+                updated_high_scores = add_high_scores(high_scores, name, correct_answers, elapsed_time)
                 print(f"New high score for {name}!")
 
-            print("\nHigh Scores:")
-            for user, record in high_scores.items():
-                print(f"{user.title()}: {record['time']} seconds")
-
-            print("\n")
-
-
     with open(file, "w") as data_file:
-        json.dump(high_scores, data_file)
+        json.dump(updated_high_scores, data_file)
+        print("\nHigh Scores:")
+        for user, record in updated_high_scores.items():
+            print(f"{user.title()}: {record['time']} seconds")
+
+        print("\n")
 
 
 
