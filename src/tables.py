@@ -3,6 +3,7 @@ import os
 import random
 import time
 import sys
+from config import NUMBER_OF_QUESTIONS
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
@@ -12,7 +13,6 @@ if current_dir not in sys.path:
 from logos import welcome, congratulations, try_next_time
 from logic import *
 
-NUMBER_OF_QUESTIONS = 20
 # def waiting_for_answer():
 #     threading.Event().wait(2)
 #     print("Time's up!")
@@ -77,7 +77,7 @@ def main():
             if str_data:
                 high_scores = json.loads(str_data)
                 user_high_record = high_scores.get(name, [])
-                add_entry_to_high_scores(high_scores, name, correct_answers, elapsed_time)
+                add_high_scores(high_scores, name, correct_answers, elapsed_time)
             else:
                 high_scores[name] = correct_answers
                 print(f"New high score for {name}!")

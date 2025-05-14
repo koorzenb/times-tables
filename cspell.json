@@ -18,7 +18,10 @@
 		"**/venv/**"
 	],
 	"words": [
-		"dotenv"
+		"dotenv",
+		"highlightthickness",
+		"padx",
+		"pady"
 	],
 	"ignoreWords": [
 		// Add words to explicitly ignore here
