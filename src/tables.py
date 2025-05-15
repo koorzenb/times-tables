@@ -1,6 +1,5 @@
 import json
 import os
-import random
 import time
 import sys
 from config import NUMBER_OF_QUESTIONS
@@ -22,6 +21,7 @@ def get_high_scores():
     if not os.path.exists(file):
         with open(file, "w") as data_file:
             json.dump({}, data_file)
+            return None
     else:
         with open(file, "r") as data_file:
             str_data = data_file.read()
@@ -50,17 +50,15 @@ def main():
     name = input("Enter your name: ")
     name = name.lower()
     correct_answers = 0
-
     index = 1
 
     starting_time = time.time()
 
     for _ in range(NUMBER_OF_QUESTIONS):
         num1, num2, prod = generate_question(9)
-        isMultiply = random.choice([True, False])
-        eq = ''
+        is_multiply = random.choice([True, False])
 
-        if isMultiply:
+        if is_multiply:
             eq = f"{num1} * {num2}"
             answer = prod
         else:
@@ -78,17 +76,19 @@ def main():
     passed = float(correct_answers / NUMBER_OF_QUESTIONS) >= 0.8
     end_time = time.time()
     elapsed_time = end_time - starting_time
-    elapsed_time = "{:.2f}".format(elapsed_time)
+    updated_high_scores = get_high_scores()
 
     if passed:
         print(f"{congratulations}\n")
         print(f"{name}, you passed!")
+        updated_high_scores = add_high_scores(get_high_scores(), name, correct_answers, elapsed_time)
     else:
         print(f"{try_next_time}\n")
         print(f"Sorry, {name}, you failed this time. Better luck next time!")
-    print(f"You got {correct_answers} out of {NUMBER_OF_QUESTIONS} questions correct.")
+        
+    elapsed_time = "{:.2f}".format(elapsed_time)
+    print(f"You got {correct_answers} out of {NUMBER_OF_QUESTIONS} questions correct in {elapsed_time} seconds.")
 
-    updated_high_scores = add_high_scores(get_high_scores(), name, correct_answers, elapsed_time)
 
     with open(os.path.join(os.path.dirname(__file__), "high_scores.json"), "w") as data_file:
         json.dump(updated_high_scores, data_file)

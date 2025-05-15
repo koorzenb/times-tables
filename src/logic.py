@@ -20,23 +20,25 @@ def ask_question(text):
         print("Invalid input. Please enter a number.")
         return ask_question(text)
 
-def print_response(isCorrect, answer, eq):
-	if isCorrect:          
-		print('\n' * 20)
-		print(f"{correct}\n\n")
-	else:
-		print('\n')
-		print(f"{wrong}\n\n {eq} = {answer}\n\n")
-  
+def print_response(is_correct, answer, eq):
+    if is_correct:
+        print('\n' * 20)
+        print(f"{correct}\n\n")
+    else:
+        print('\n')
+        print(f"{wrong}\n\n {eq} = {answer}\n\n")
+
 def add_high_scores(high_scores: Dict[str, Any], name: str, correct_answers: int, elapsed_time: float) -> Dict[str, Dict[str, Union[int, float]]]:
-    user_record = high_scores.get(name, {})
     passed = float(correct_answers) >= PASS_THRESHOLD
-    
+
     if not passed:
         return high_scores
 
+    user_record = high_scores.get(name, {})
+    formatted_elapsed_time = "{:.2f}".format(elapsed_time)
+
     if not user_record:
-        high_scores[name] = {"correctAnswers": correct_answers, "time": elapsed_time}
+        high_scores[name] = {"correctAnswers": correct_answers, "time": formatted_elapsed_time}
     else:
         current_correct_answers = user_record.get("correctAnswers", 0)
         current_time = user_record.get("time", float('inf'))
@@ -44,7 +46,7 @@ def add_high_scores(high_scores: Dict[str, Any], name: str, correct_answers: int
         if (correct_answers > current_correct_answers or 
             (elapsed_time < current_time and correct_answers >= current_correct_answers)):
             print(f"New high score for {name}!")
-            high_scores[name] = {"correctAnswers": correct_answers, "time": elapsed_time}
+            high_scores[name] = {"correctAnswers": correct_answers, "time": formatted_elapsed_time}
                     
     return high_scores
 
