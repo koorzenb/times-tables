@@ -41,10 +41,10 @@ def add_high_scores(high_scores: Dict[str, Any], name: str, correct_answers: int
         high_scores[name] = {"correctAnswers": correct_answers, "time": formatted_elapsed_time}
     else:
         current_correct_answers = user_record.get("correctAnswers", 0)
-        current_time = user_record.get("time", float('inf'))
+        current_time = user_record.get("time")
         
         if (correct_answers > current_correct_answers or 
-            (elapsed_time < current_time and correct_answers >= current_correct_answers)):
+            (elapsed_time < float(current_time) and correct_answers >= current_correct_answers)):
             print(f"New high score for {name}!")
             high_scores[name] = {"correctAnswers": correct_answers, "time": formatted_elapsed_time}
                     

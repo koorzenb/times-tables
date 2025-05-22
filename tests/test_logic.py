@@ -12,10 +12,10 @@ class TestAddHighScores(unittest.TestCase):
     def test_add_new_entry_to_high_scores(self):
         """Test adding a new entry to high scores"""
         correct_answers = 15
-        elapsed_time = 120.0
+        elapsed_time = '120.00'
         high_scores = {}
 
-        updated_scores = add_high_scores(high_scores, self.name, correct_answers, elapsed_time)
+        updated_scores = add_high_scores(high_scores, self.name, correct_answers, float(elapsed_time))
         self.assertIn(self.name, updated_scores)
         self.assertEqual(updated_scores[self.name]["correctAnswers"], correct_answers)
         self.assertEqual(updated_scores[self.name]["time"], elapsed_time)
@@ -28,19 +28,19 @@ class TestAddHighScores(unittest.TestCase):
 
         # Then update with higher score
         correct_answers = 18
-        elapsed_time = 150.0
-        updated_scores = add_high_scores(saved_high_scores, self.name, correct_answers, elapsed_time)
+        elapsed_time = '150.00'
+        updated_scores = add_high_scores(saved_high_scores, self.name, correct_answers, float(elapsed_time))
         self.assertEqual(updated_scores[self.name]["correctAnswers"], correct_answers)
         self.assertEqual(updated_scores[self.name]["time"], elapsed_time)
 
     def test_update_entry_with_better_time_and_lower_score(self):
         saved_correct_answers = 20
-        saved_elapsed_time = 150.0
+        saved_elapsed_time = '150.00'
         saved_high_scores = {f"{self.name}": {"correctAnswers": saved_correct_answers, "time": saved_elapsed_time}}
         
         correct_answers = 18
-        elapsed_time = 120.0
-        updated_scores = add_high_scores(saved_high_scores, self.name, correct_answers, elapsed_time)
+        elapsed_time = '120.00'
+        updated_scores = add_high_scores(saved_high_scores, self.name, correct_answers, float(elapsed_time))
         self.assertEqual(updated_scores[self.name]["correctAnswers"], saved_correct_answers)
         self.assertEqual(updated_scores[self.name]["time"], saved_elapsed_time)
         
@@ -50,7 +50,7 @@ class TestAddHighScores(unittest.TestCase):
         saved_high_scores = {f"{self.name}": {"correctAnswers": saved_correct_answers, "time": saved_elapsed_time}}
         
         correct_answers = 25
-        elapsed_time = 150.0
-        updated_scores = add_high_scores(saved_high_scores, self.name, correct_answers, elapsed_time)
+        elapsed_time = '150.00'
+        updated_scores = add_high_scores(saved_high_scores, self.name, correct_answers, float(elapsed_time))
         self.assertEqual(updated_scores[self.name]["correctAnswers"], correct_answers)
         self.assertEqual(updated_scores[self.name]["time"], elapsed_time)
