@@ -8,7 +8,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.append(current_dir)
 
-from logos import welcome, congratulations, try_next_time
+from logos import welcome, congratulations, try_next_time, cheer_lourens, cheer_adriaan
 from logic import *
 
 # def waiting_for_answer():
@@ -83,6 +83,15 @@ def play_game():
     print('\n' * 20)
     return correct_answers
 
+
+def show_cheer(name):
+    print('\n' * 20)
+    if name.lower() == "lourens":
+        print(f"{cheer_lourens}\n")
+    elif name.lower() == "adriaan":
+        print(f"{cheer_adriaan}\n")
+
+
 def main():
     print('\n' * 20)
     print(f"{welcome}\n")
@@ -90,6 +99,7 @@ def main():
     show_high_scores()
 
     name = get_username(get_high_scores())
+    show_cheer(name)
     starting_time = time.time()
     correct_answers = play_game()
     passed = float(correct_answers / NUMBER_OF_QUESTIONS) >= 0.8
