@@ -50,4 +50,37 @@ def add_high_scores(high_scores: Dict[str, Any], name: str, correct_answers: int
                     
     return high_scores
 
+_username = None
 
+def get_user_prompt(high_scores):
+    usernames = list(high_scores.keys())
+
+    # if not usernames:
+    #     return "Please enter your name: "
+    # else:
+    prompt = "Please select a name from the list below:\n"
+    for i, username in enumerate(usernames, start=1):
+        prompt += f"{i}. {username.title()}\n"
+    return prompt
+    
+def get_username(high_scores) -> str:
+
+    # if not high_scores:
+    #     username = input("Please enter your name: ").strip()
+    # else:
+    try:
+        prompt = get_user_prompt(high_scores)
+        print(prompt)
+        choice = int(input())
+        username = list(high_scores.keys())[choice - 1]
+    except (ValueError, IndexError):
+        print("Invalid choice. Please try again.")
+        return get_username(high_scores)
+    
+    return username.title()
+        
+        
+    
+
+
+    
