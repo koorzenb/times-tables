@@ -175,4 +175,3 @@ cython_debug/
 
 # ignore all password files
 password.*
-/src/high_scores.json
