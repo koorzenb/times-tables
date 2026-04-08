@@ -8,8 +8,13 @@ from typing import Dict, Any, Union
 from src.config import PASS_THRESHOLD
 
 def generate_question(max_num):
+    overrideNum2 = 2
     num1 = random.randint(1, max_num)
-    num2 = random.randint(1, max_num)
+    
+    if overrideNum2 is not None:
+        num2 = overrideNum2
+    else:
+        num2 = random.randint(1, max_num)
     return num1, num2, num1 * num2
 
 def ask_question(text):
