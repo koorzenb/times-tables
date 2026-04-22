@@ -8,7 +8,7 @@ from typing import Dict, Any, Union
 from src.config import PASS_THRESHOLD
 
 def generate_question(max_num):
-    overrideNum2 = 2
+    overrideNum2 = random.randint(7, 9) 
     num1 = random.randint(1, max_num)
     
     if overrideNum2 is not None:
